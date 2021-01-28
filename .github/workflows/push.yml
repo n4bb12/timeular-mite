@@ -1,0 +1,24 @@
+name: Push-Workflow
+
+on: push
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install
+        uses: bahmutov/npm-install@v1
+
+      - name: Code Style
+        run: yarn format:check
+
+      - name: Types
+        run: yarn typecheck

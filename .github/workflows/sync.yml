@@ -1,0 +1,38 @@
+name: Sync-Workflow
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+    inputs:
+      range:
+        description: "Range"
+        required: true
+        default: "today"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Node 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install
+        uses: bahmutov/npm-install@v1
+
+      - name: Sync
+        env:
+          TIMEULAR_API_KEY: ${{ secrets.TIMEULAR_API_KEY }}
+          TIMEULAR_API_SECRET: ${{ secrets.TIMEULAR_API_SECRET }}
+          MITE_ACCOUNT_NAME: ${{ secrets.MITE_ACCOUNT_NAME }}
+          MITE_API_KEY: ${{ secrets.MITE_API_KEY }}
+          MAPPING_TS: ${{ secrets.MAPPING_TS }}
+        run: |
+          input=${{ github.event.inputs.range }}
+          range=${input:-yesterday}
+          yarn sync $range
