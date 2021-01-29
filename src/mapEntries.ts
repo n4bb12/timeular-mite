@@ -20,7 +20,7 @@ export function mapEntry(mapping: Mapping, entry: TimeularEntry): DeepPartial<Mi
     time_entry: {
       date_at: from.split("T")[0],
       minutes: dayjs(to).diff(from, "minutes"),
-      note: entry.note.text || "",
+      note: [entry.note.text || "", ...entry.note.tags].filter(Boolean).join("\n"),
       project_id: project,
       service_id: service,
     },
