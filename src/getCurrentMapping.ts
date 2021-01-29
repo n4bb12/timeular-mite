@@ -1,10 +1,11 @@
+import dayjs from "dayjs"
 import { pathExists, writeFile } from "fs-extra"
 
 import "./env"
 import { fail } from "./fail"
 
 export const mappingFile = "config/mapping.ts"
-export const mappingBackupFile = "config/mapping.backup.ts"
+export const mappingBackupFile = `config/mapping.backup-${dayjs().toISOString().split("T")[0]}.ts`
 
 export interface Mapping {
   [id: string]: { project: number; service: number }
