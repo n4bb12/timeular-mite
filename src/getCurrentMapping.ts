@@ -5,7 +5,10 @@ import "./env"
 import { fail } from "./fail"
 
 export const mappingFile = "config/mapping.ts"
-export const mappingBackupFile = `config/mapping.backup-${dayjs().toISOString().split("T")[0]}.ts`
+export const mappingBackupFile = `config/mapping.backup-${dayjs()
+  .toISOString()
+  .split(".")[0]
+  .replace(/[\D\W]/g, "")}.ts`
 
 export interface Mapping {
   [id: string]: { project: number; service: number }
