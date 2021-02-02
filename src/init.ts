@@ -2,7 +2,7 @@ import { pascalCase } from "change-case"
 import { move, pathExists } from "fs-extra"
 
 import "./env"
-import { getCurrentMapping, mappingBackupFile, mappingFile } from "./getCurrentMapping"
+import { getMappingConfig, mappingBackupFile, mappingFile } from "./getCurrentMapping"
 import { createTextFile } from "./lib/createTextFile"
 import {
   getMiteAccessToken,
@@ -41,7 +41,7 @@ async function main() {
   const miteProjects = await getMiteProjects(miteAccountName, miteAccessToken)
   const miteServices = await getMiteServices(miteAccountName, miteAccessToken)
 
-  const mapping = await getCurrentMapping({ required: false })
+  const mapping = await getMappingConfig({ required: false })
 
   if (await pathExists(mappingFile)) {
     await move(mappingFile, mappingBackupFile)

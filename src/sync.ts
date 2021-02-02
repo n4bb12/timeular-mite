@@ -1,16 +1,16 @@
 import "./env"
-import { getCurrentMapping } from "./getCurrentMapping"
+import { getMappingConfig } from "./getCurrentMapping"
 import { getDateRange } from "./getDateRange"
 import { mapEntry } from "./mapEntries"
-import { getMiteAccessToken, getMiteAccountName } from "./mite"
-import { createMiteEntry, deleteMiteEntry, getMiteEntries } from "./mite/entries"
+import { getMiteAccessToken, getMiteAccountName, MiteEntry } from "./mite"
+import { createMiteEntries, deleteMiteEntries, getMiteEntries } from "./mite/entries"
 import { getTimeularAccessToken, getTimeularEntries } from "./timeular"
 
 async function main() {
   const timeularAccessToken = await getTimeularAccessToken()
   const miteAccountName = getMiteAccountName()
   const miteAccessToken = getMiteAccessToken()
-  const mapping = await getCurrentMapping({ required: true })
+  const mappingConfig = await getMappingConfig({ required: true })
 
   const dates = getDateRange(process.argv[2])
 
@@ -25,19 +25,14 @@ async function main() {
       continue
     }
 
-    for (const entry of miteEntries) {
-      await deleteMiteEntry(miteAccountName, miteAccessToken, entry.time_entry.id)
-    }
+    await deleteMiteEntries(miteAccountName, miteAccessToken, miteEntries)
 
     const timeularEntries = await getTimeularEntries(timeularAccessToken, date)
+    const mappedEntries = timeularEntries
+      .map(entry => mapEntry(entry, mappingConfig))
+      .filter((mapped): mapped is MiteEntry => !!mapped)
 
-    for (const entry of timeularEntries) {
-      const mapped = mapEntry(mapping, entry)
-
-      if (mapped) {
-        await createMiteEntry(miteAccountName, miteAccessToken, mapped)
-      }
-    }
+    await createMiteEntries(miteAccountName, miteAccessToken, mappedEntries)
   }
 }
 

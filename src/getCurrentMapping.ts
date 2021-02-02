@@ -14,7 +14,7 @@ export interface Mapping {
   [id: string]: { project: number; service: number }
 }
 
-export async function getCurrentMapping({ required }: { required?: boolean }) {
+export async function getMappingConfig({ required }: { required?: boolean }) {
   let mapping: Mapping | undefined = undefined
 
   if (process.env.MAPPING_TS) {

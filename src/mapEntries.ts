@@ -5,7 +5,7 @@ import { Mapping } from "./getCurrentMapping"
 import { MiteEntry } from "./mite"
 import { TimeularEntry } from "./timeular"
 
-export function mapEntry(mapping: Mapping, entry: TimeularEntry): DeepPartial<MiteEntry> | undefined {
+export function mapEntry(entry: TimeularEntry, mapping: Mapping): DeepPartial<MiteEntry> | undefined {
   const { project, service } = mapping[entry.activityId]
 
   if (!project || !service) {

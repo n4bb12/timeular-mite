@@ -24,8 +24,8 @@ export async function getMiteEntries(accountName: string, apiKey: string, date: 
 /**
  * https://mite.yo.lk/en/api/time-entries.html#delete
  */
-export async function deleteMiteEntry(accountName: string, apiKey: string, id: MiteEntry["time_entry"]["id"]) {
-  const url = `https://${accountName}.mite.yo.lk/time_entries/${id}.json`
+export async function deleteMiteEntry(accountName: string, apiKey: string, entry: MiteEntry) {
+  const url = `https://${accountName}.mite.yo.lk/time_entries/${entry.time_entry.id}.json`
   console.log("DELETE", url)
 
   const { body } = await got.delete<MiteEntry>(url, {
@@ -34,6 +34,13 @@ export async function deleteMiteEntry(accountName: string, apiKey: string, id: M
   })
 
   return body
+}
+
+export async function deleteMiteEntries(accountName: string, apiKey: string, entries: MiteEntry[]) {
+  for (const entry of entries) {
+    await deleteMiteEntry(accountName, apiKey, entry)
+  }
+  console.log(`Deleted ${entries.length} entries from Mite.`)
 }
 
 /**
@@ -50,4 +57,11 @@ export async function createMiteEntry(accountName: string, apiKey: string, entry
   })
 
   return body
+}
+
+export async function createMiteEntries(accountName: string, apiKey: string, entries: MiteEntry[]) {
+  for (const mapped of entries) {
+    await createMiteEntry(accountName, apiKey, mapped)
+  }
+  console.log(`Created ${entries.length} entries in Mite.`)
 }
