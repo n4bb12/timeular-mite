@@ -27,5 +27,9 @@ export async function getTimeularEntries(accessToken: string, date: dayjs.Dayjs)
     },
   })
 
+  // If entries cross midnight then we look at which day it started on and only count that version.
   return body.timeEntries
+    .filter(entry => dayjs(entry.duration.startedAt).isAfter(from))
+    .filter(entry => dayjs(entry.duration.startedAt).isBefore(to))
+    .sort((a, b) => a.duration.startedAt.localeCompare(b.duration.startedAt))
 }
