@@ -15,11 +15,14 @@ export function mapEntry(entry: TimeularEntry, mapping: Mapping): DeepPartial<Mi
   const from = parseTimeularDate(entry.duration.startedAt)
   const to = parseTimeularDate(entry.duration.stoppedAt)
 
+  const roundedMinutes = Math.round(to.diff(from, "minutes", true))
+  const noteWithTags = [entry.note.text || "", ...entry.note.tags].filter(Boolean).join("\n")
+
   const miteEntry: DeepPartial<MiteEntry> = {
     time_entry: {
-      minutes: dayjs(to).diff(from, "minutes"),
-      note: [entry.note.text || "", ...entry.note.tags].filter(Boolean).join("\n"),
       date_at: formatMiteDate(from),
+      minutes: roundedMinutes,
+      note: noteWithTags,
       project_id: project,
       service_id: service,
     },
