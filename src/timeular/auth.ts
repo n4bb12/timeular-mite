@@ -1,4 +1,3 @@
-import { writeFile } from "fs-extra"
 import got from "got"
 
 import { fail } from "../fail"
@@ -29,8 +28,6 @@ export async function getTimeularAccessToken() {
     responseType: "json",
     json: { apiKey, apiSecret },
   })
-
-  await writeFile(".env.timeular", `TIMEULAR_ACCESS_TOKEN="${body.token}"`)
 
   return body.token
 }

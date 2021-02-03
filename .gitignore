@@ -1,5 +1,4 @@
 !.env.template
-.env
-.env.timeular
+.env*
 config/*.ts
 node_modules/
