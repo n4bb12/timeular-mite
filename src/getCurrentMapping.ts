@@ -1,8 +1,8 @@
-import dayjs from "dayjs"
 import { pathExists, writeFile } from "fs-extra"
 
 import "./env"
 import { fail } from "./fail"
+import { dayjs } from "./lib/dayjs"
 
 export const mappingFile = "config/mapping.ts"
 export const mappingBackupFile = `config/mapping.backup-${dayjs()

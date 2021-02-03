@@ -1,4 +1,5 @@
 export * from "./auth"
+export * from "./date"
 export * from "./projects"
 export * from "./services"
 export * from "./types"

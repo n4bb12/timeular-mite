@@ -1,7 +1,6 @@
-import dayjs from "dayjs"
-
 import "./env"
 import { fail } from "./fail"
+import { dayjs } from "./lib/dayjs"
 
 export function getDateRange(range: string) {
   if (range === "today") {

@@ -1,4 +1,5 @@
 export * from "./activities"
 export * from "./auth"
+export * from "./date"
 export * from "./entries"
 export * from "./types"

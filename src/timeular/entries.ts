@@ -1,11 +1,8 @@
-import dayjs from "dayjs"
 import got from "got"
 
+import { dayjs } from "../lib/dayjs"
+import { formatTimeularDate, parseTimeularDate } from "./date"
 import { TimeularEntries } from "./types"
-
-function formatDate(date: dayjs.Dayjs) {
-  return date.toISOString().split(".")[0] + ".000"
-}
 
 /**
  * https://developers.timeular.com/#d4c6e3c4-c38b-4891-aa19-907460f43f9b
@@ -14,8 +11,8 @@ export async function getTimeularEntries(accessToken: string, date: dayjs.Dayjs)
   const from = date.startOf("day")
   const to = date.endOf("day")
 
-  const fromStr = formatDate(from)
-  const toStr = formatDate(to)
+  const fromStr = formatTimeularDate(from)
+  const toStr = formatTimeularDate(to)
 
   const url = `https://api.timeular.com/api/v3/time-entries/${fromStr}/${toStr}`
   console.log("GET", url)
@@ -29,7 +26,9 @@ export async function getTimeularEntries(accessToken: string, date: dayjs.Dayjs)
 
   // If entries cross midnight then we look at which day it started on and only count that version.
   return body.timeEntries
-    .filter(entry => dayjs(entry.duration.startedAt).isAfter(from))
-    .filter(entry => dayjs(entry.duration.startedAt).isBefore(to))
+    .filter(entry => {
+      const date = parseTimeularDate(entry.duration.startedAt)
+      return date.isAfter(from) && date.isBefore(to)
+    })
     .sort((a, b) => a.duration.startedAt.localeCompare(b.duration.startedAt))
 }
