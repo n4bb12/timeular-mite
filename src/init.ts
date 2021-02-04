@@ -2,7 +2,7 @@ import { pascalCase } from "change-case"
 import { move, pathExists } from "fs-extra"
 
 import "./env"
-import { getMappingConfig, mappingBackupFile, mappingFile } from "./getCurrentMapping"
+import { getMappingConfig, mappingBackupFile, mappingFile } from "./getMappingConfig"
 import { createTextFile } from "./lib/createTextFile"
 import {
   getMiteAccessToken,

@@ -1,5 +1,5 @@
 import "./env"
-import { getMappingConfig } from "./getCurrentMapping"
+import { getMappingConfig } from "./getMappingConfig"
 import { getDateRange } from "./getDateRange"
 import { mapEntry } from "./mapEntries"
 import { getMiteAccessToken, getMiteAccountName, MiteEntry } from "./mite"

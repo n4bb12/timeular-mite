@@ -1,6 +1,6 @@
 import { DeepPartial } from "utility-types"
 
-import { Mapping } from "./getCurrentMapping"
+import { Mapping } from "./getMappingConfig"
 import { formatMiteDate, MiteEntry } from "./mite"
 import { parseTimeularDate, TimeularEntry } from "./timeular"
 
