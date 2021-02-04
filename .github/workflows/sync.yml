@@ -27,11 +27,12 @@ jobs:
 
       - name: Sync
         env:
-          TIMEULAR_API_KEY: ${{ secrets.TIMEULAR_API_KEY }}
-          TIMEULAR_API_SECRET: ${{ secrets.TIMEULAR_API_SECRET }}
+          MAPPING_TS: ${{ secrets.MAPPING_TS }}
           MITE_ACCOUNT_NAME: ${{ secrets.MITE_ACCOUNT_NAME }}
           MITE_API_KEY: ${{ secrets.MITE_API_KEY }}
-          MAPPING_TS: ${{ secrets.MAPPING_TS }}
+          TIMEULAR_API_KEY: ${{ secrets.TIMEULAR_API_KEY }}
+          TIMEULAR_API_SECRET: ${{ secrets.TIMEULAR_API_SECRET }}
+          TIMEULAR_TIMEZONE: ${{ secrets.TIMEULAR_TIMEZONE }}
         run: |
           input=${{ github.event.inputs.range }}
           range=${input:-yesterday}
