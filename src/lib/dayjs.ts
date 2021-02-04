@@ -21,6 +21,14 @@ import timezone = require("dayjs/plugin/timezone")
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
-dayjs.tz.setDefault(process.env.TIMEULAR_TIMEZONE || "Europe/Berlin")
 
-export { dayjs }
+const tz = process.env.TIMEULAR_TIMEZONE || "Europe/Berlin"
+
+dayjs.tz.setDefault(tz)
+
+function createDateInTimeZone(...params: Parameters<typeof dayjs>) {
+  return dayjs(...params).tz(tz)
+}
+
+export { createDateInTimeZone as dayjs }
+export type Dayjs = dayjs.Dayjs
