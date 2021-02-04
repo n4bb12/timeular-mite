@@ -1,14 +1,14 @@
 import got from "got"
 import { DeepPartial } from "utility-types"
 
-import { dayjs } from "../lib/dayjs"
+import { Dayjs } from "../lib/dayjs"
 import { formatMiteDate } from "./date"
 import { MiteEntry } from "./types"
 
 /**
  * https://mite.yo.lk/en/api/time-entries.html#list-daily
  */
-export async function getMiteEntries(accountName: string, apiKey: string, date: dayjs.Dayjs) {
+export async function getMiteEntries(accountName: string, apiKey: string, date: Dayjs) {
   const dateStr = formatMiteDate(date)
 
   const url = `https://${accountName}.mite.yo.lk/time_entries.json?user_id=current&at=${dateStr}`

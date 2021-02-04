@@ -1,6 +1,6 @@
-import { dayjs } from "../lib/dayjs"
+import { dayjs, Dayjs } from "../lib/dayjs"
 
-export function formatTimeularDate(date: dayjs.Dayjs) {
+export function formatTimeularDate(date: Dayjs) {
   return date.toISOString().split(".")[0] + ".000"
 }
 

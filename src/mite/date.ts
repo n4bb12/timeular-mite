@@ -1,5 +1,5 @@
-import { dayjs } from "../lib/dayjs"
+import { Dayjs } from "../lib/dayjs"
 
-export function formatMiteDate(date: dayjs.Dayjs) {
+export function formatMiteDate(date: Dayjs) {
   return date.format("YYYY-MM-DD")
 }

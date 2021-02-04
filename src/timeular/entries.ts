@@ -1,13 +1,13 @@
 import got from "got"
 
-import { dayjs } from "../lib/dayjs"
+import { Dayjs } from "../lib/dayjs"
 import { formatTimeularDate, parseTimeularDate } from "./date"
 import { TimeularEntries } from "./types"
 
 /**
  * https://developers.timeular.com/#d4c6e3c4-c38b-4891-aa19-907460f43f9b
  */
-export async function getTimeularEntries(accessToken: string, date: dayjs.Dayjs) {
+export async function getTimeularEntries(accessToken: string, date: Dayjs) {
   const from = date.startOf("day")
   const to = date.endOf("day")
 
