@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json.schemastore.org/package",
   "name": "timeular-mite",
   "version": "0.0.0-development",
   "private": true,
@@ -9,14 +10,15 @@
     "sync",
     "time-tracking"
   ],
+  "repository": "github:n4bb12/timeular-mite",
   "license": "ISC",
   "author": "Abraham Schilling <AbrahamSchilling@gmail.com>",
   "scripts": {
+    "config:init": "ts-node src/init.ts",
     "fix": "yarn format && yarn typecheck",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,yaml,md,mdx}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,yml,yaml,md,mdx}\"",
     "sync": "ts-node src/sync.ts",
-    "config:init": "ts-node src/init.ts",
     "typecheck": "tsc --noEmit"
   },
   "husky": {
