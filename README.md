@@ -33,7 +33,7 @@ The second script allows you to one-way-sync your Timeular calendar entries into
 
 Timeular and Mite can only be accessed with API credentials. Please follow these steps:
 
-- Create a copy `.env.template` named `.env`.
+- Create a copy of `config/.env.template` named `config/.env`.
 - Set the Timeular API key and secret from:  
   https://profile.timeular.com/#/app/account
 - Set your Mite account name and the API key from:  
