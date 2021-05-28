@@ -63,7 +63,7 @@ If a day has locked entries that day will be skipped. This would require merging
 
 ### Step 5 — Scheduled Synching
 
-In `.github/workflows/schedule.yml` you can find a GitHub Actions Workflow that syncs yesterday's entries at 1:00 a.m.
+In `.github/workflows/sync.yml` you can find a GitHub Actions Workflow that syncs yesterday's entries at 1:00 a.m.
 
 To make it work you need to first complete step 3.
 
